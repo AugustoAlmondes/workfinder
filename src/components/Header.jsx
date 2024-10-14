@@ -1,16 +1,9 @@
 import '../styles/header.css'
-import '../styles/index.css'
-
-import {useState} from 'react';
-
 import Logo from '../assets/Logomarca.png'
-import FundoHeader from '../assets/fundo-header2.png'
+import PropTypes from 'prop-types'
 
-function Header() {
-
-    // typeUser = Tipo de usuário - setTypeUser = função para alterar o tipo  de usuário
-    const [typeUser, setTypeUser] = useState(0); //0 para empresa e 1 para usuário
-    const [fezLogin, setFezLogin] = useState(true); //True para logado e falso para deslogado
+function Header({ typeUser, fezLogin }) {
+    // typeUser = Tipo de usuário - setTypeUser = função para alterar o tipo  de usuári
 
     return (
         <header>
@@ -22,13 +15,17 @@ function Header() {
                         <a href="index.html">Home</a>
                     </li>
                     <li className="l2 font-1 animate__animated animate__fadeIn animate__delay-1s" >
-                        Sobre
-                    </li>
-                    <li className="l3 font-1 animate__animated animate__fadeIn animate__delay-1s">
-                        <a href="allvagas.html">Vagas</a>
+                        <a href="#">Sobre
+                        </a>
                     </li>
 
-                    {typeUser === 0 && fezLogin &&
+                    {
+                        typeUser != 0 ? (<li className="l3 font-1 animate__animated animate__fadeIn animate__delay-1s">
+                            <a href="allvagas.html">Vagas</a>
+                        </li>) : (<li style={{ display: 'none' }}></li>)
+                    }
+
+                    {(typeUser === 0 || typeUser === 2) && fezLogin &&
                         (
                             <li id="cadVaga" className="l4 font-1 animate__animated animate__fadeIn animate__delay-1s">
                                 <a id="cadVagaLink" href="cadEmpresa.html" target="_blank">Nova Vaga</a>
@@ -58,21 +55,14 @@ function Header() {
 
                 </ul>
             </div>
-            <div className="cab-part-2">
-                <div className="imagem-fundo animate__animated animate__fadeInDown animate__slower">
-                    <img src={FundoHeader} alt="Fundo-header" />
-                    <button className="saiba-mais font-1 animate__animated animate__fadeInDown animate__delay-2s">
-                        Saiba Mais
-                    </button>
-                    <div className="texto-img l5 font-1 animate__animated animate__fadeIn animate__delay-2s">
-                        <span>Conectando talento</span><br />
-                        às oportunidades <br />
-                        que impulsionam o <span>futuro.</span>
-                    </div>
-                </div>
-            </div>
         </header>
     )
+
 }
+
+Header.propTypes = {
+    typeUser: PropTypes.number.isRequired,
+    fezLogin: PropTypes.bool.isRequired,
+};
 
 export default Header
