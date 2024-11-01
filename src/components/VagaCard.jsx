@@ -1,14 +1,15 @@
 import '../styles/cardVaga.css'
+import PropTypes from 'prop-types'
 
-export default function VagaCard() {
+export default function VagaCard({nomeEmpresaVaga, cargoVaga}) {
     return (
         <>
             <div className="card">
                 <div className="foto-card">
                     <img src="../imagens/assai.png" alt="logo_empresa" />
-                    <h3>Assaí Atacadista</h3>
+                    <h3>{nomeEmpresaVaga}</h3>
                 </div>
-                <h4>Estoquista</h4>
+                <h4>{cargoVaga}</h4>
                 <ul className="requisitos">
                     <li>CLT</li>
                     <li>Presencial</li>
@@ -47,3 +48,8 @@ export default function VagaCard() {
         </>
     );
 }
+
+VagaCard.propTypes = {
+    nomeEmpresaVaga: PropTypes.arrayOf(PropTypes.string),
+    cargoVaga: PropTypes.arrayOf(PropTypes.string)
+};
