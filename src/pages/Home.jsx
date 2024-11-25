@@ -15,20 +15,34 @@ import PropTypes from "prop-types"
 // import { useEffect } from 'react';
 
 import '../styles/Home.css';
+import { useEffect } from 'react';
 
-export default function Home({fezLogin, typeUser}) {
 
+
+export default function Home({fezLogin, typeUser, setFezLogin, setTypeUser}) {
+
+    function handleLogout() {
+        setFezLogin(false);
+        setTypeUser(1);
+    
+        localStorage.removeItem('fezLogin');
+        localStorage.removeItem('typeUser');
+        window.location.reload();
+    }
+
+    useEffect(() => {
+        const savedLogin = localStorage.getItem('fezLogin');
+        const savedTypeUser = localStorage.getItem('typeUser');
+        if (savedLogin === 'true') {
+            setFezLogin(true);
+            setTypeUser(Number(savedTypeUser))
+        }
+    })
 
     
     let vagasCards = [];
     let nomeEmpresaVaga = ['Assai Atacadista', 'Engipec', 'Atacadão', 'Virtex', 'Carvalho', 'Moto Moura']
     let cargoVaga = ['Analista de Rede', 'Vendedor', 'Faxineiro', 'Atendente', 'Auxiliar de RH', 'Atendente']
-
-    // useEffect(() => {
-    //     if (!fezLogin) {
-    //         setTypeUser(1);
-    //     }
-    // }, [fezLogin]);
 
     // TEMPORÁRIO
     for (let index = 0; index < 6; index++) {
@@ -36,7 +50,7 @@ export default function Home({fezLogin, typeUser}) {
     }
     return (
         <>
-            <Header typeUser={typeUser} fezLogin={fezLogin} />
+            <Header typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />
             <HeaderPart2 />
 
             <main>
@@ -263,5 +277,7 @@ export default function Home({fezLogin, typeUser}) {
 
 Home.propTypes = {
     fezLogin: PropTypes.bool.isRequired,
-    typeUser: PropTypes.number.isRequired
+    typeUser: PropTypes.number.isRequired,
+    setTypeUser: PropTypes.func.isRequired,
+    setFezLogin: PropTypes.func.isRequired
 }

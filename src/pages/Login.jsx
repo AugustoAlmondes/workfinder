@@ -2,13 +2,15 @@ import Background from "../components/Background";
 import { useNavigate } from "react-router-dom"; // Importa useNavigate
 import { useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
+import PropTypes from 'prop-types';
 import 'react-toastify/dist/ReactToastify.css'; // Estilos do Toast
+// import { useEffect } from "react";
 
 import '../styles/Login.css'
 // import background from "../components/Background";
 
 
-export default function Login({setFezLogin, setTypeUser}) {
+export default function Login({ setFezLogin, setTypeUser }) {
     const navigate = useNavigate();
     const [frameLogin, setFrameLogin] = useState(2) //0 PARA EMPRESA, 1 PARA USUARIO E 2 PARA LOGIN
     const [isEnterprise, setIsEnterprise] = useState(null)
@@ -185,6 +187,8 @@ export default function Login({setFezLogin, setTypeUser}) {
 
                     setFezLogin(true);
                     setTypeUser(isEnterprise ? 0 : 1);
+                    localStorage.setItem('fezLogin', true);
+                    localStorage.setItem('typeUser', isEnterprise ? 0 : 1);
                     navigate("/");
                 }
                 else {
@@ -555,4 +559,9 @@ export default function Login({setFezLogin, setTypeUser}) {
             </div>
         </>
     );
+}
+
+Login.propTypes = {
+    setFezLogin: PropTypes.func.isRequired,
+    setTypeUser: PropTypes.func.isRequired,
 }

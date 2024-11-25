@@ -2,9 +2,11 @@ import '../styles/header.css'
 import Logo from '../assets/Logomarca.png'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
+// import handleLogout from '../pages/Home'
 
-function Header({ typeUser, fezLogin }) {
+function Header({ typeUser, fezLogin, handleLogout }) {
     // typeUser = Tipo de usuário - setTypeUser = função para alterar o tipo  de usuári
+
 
     return (
         <header>
@@ -16,16 +18,23 @@ function Header({ typeUser, fezLogin }) {
                         {/* <a href="index.html">Home</a> */}
                         <Link to={"/"}>Home</Link>
                     </li>
-                    <li className="l2 font-1 animate__animated animate__fadeIn animate__delay-1s" >
-                        <a href="#">Sobre
-                        </a>
+                    <li className="l2 font-1 animate__animated animate__fadeIn animate__delay-1s" onClick={handleLogout} >
+                        {
+                            fezLogin ?
+                                (
+                                    'Sair'
+                                ) :
+                                (
+                                    'Sobre'
+                                )
+                        }
                     </li>
-
                     {
                         (typeUser != 0 || !fezLogin) ?
                             (
                                 <li className="l3 font-1 animate__animated animate__fadeIn animate__delay-1s">
-                                    <a href="allvagas.html">Vagas</a>
+                                    {/* Vagas */}
+                                    <Link to="/vacany">Vagas</Link>
                                 </li>
                             ) : (
                                 <li style={{ display: 'none' }}></li>
@@ -71,6 +80,7 @@ function Header({ typeUser, fezLogin }) {
 Header.propTypes = {
     typeUser: PropTypes.number.isRequired,
     fezLogin: PropTypes.bool.isRequired,
+    handleLogout: PropTypes.func.isRequired
 };
 
 export default Header

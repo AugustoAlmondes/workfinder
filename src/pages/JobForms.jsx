@@ -1,7 +1,11 @@
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+import '../styles/JobForms.css'
 export default function JobForms() {
     return (
         <>
-            <main>
+            <Header/>
+            <main className='jobforms'>
                 <div id="add-form-container" className="container">
                     <div className="row">
                         <div id="form-box" className="col-md-12">
@@ -101,7 +105,7 @@ export default function JobForms() {
                                 <label htmlFor="description">Descrição da vaga:</label>
                                 <textarea type="text" className="form-control" id="description" name="description"
                                     placeholder="Descreva as atividades do desenvolvedor..." required
-                                    style="height: 200px;"></textarea>
+                                    style={{height: "200px"}}></textarea>
                             </div>
 
                             <input type="button" value="Submeter vaga" id="enviar" className="enviar-button" />
@@ -112,6 +116,8 @@ export default function JobForms() {
                     </div>
                 </div>
             </main>
+
+            <Footer/>
         </>
     );
 }
