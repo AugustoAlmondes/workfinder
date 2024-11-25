@@ -19,16 +19,7 @@ import { useEffect } from 'react';
 
 
 
-export default function Home({fezLogin, typeUser, setFezLogin, setTypeUser}) {
-
-    function handleLogout() {
-        setFezLogin(false);
-        setTypeUser(1);
-    
-        localStorage.removeItem('fezLogin');
-        localStorage.removeItem('typeUser');
-        window.location.reload();
-    }
+export default function Home({fezLogin, typeUser, setFezLogin, setTypeUser, handleLogout}) {
 
     useEffect(() => {
         const savedLogin = localStorage.getItem('fezLogin');
@@ -279,5 +270,6 @@ Home.propTypes = {
     fezLogin: PropTypes.bool.isRequired,
     typeUser: PropTypes.number.isRequired,
     setTypeUser: PropTypes.func.isRequired,
-    setFezLogin: PropTypes.func.isRequired
+    setFezLogin: PropTypes.func.isRequired,
+    handleLogout: PropTypes.func.isRequired
 }

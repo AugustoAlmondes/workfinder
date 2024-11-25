@@ -5,6 +5,7 @@ import JobForms from './JobForms';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
+import AllVacany from './AllJobs';
 
 function App() {
 
@@ -12,7 +13,14 @@ function App() {
     const [fezLogin, setFezLogin] = useState(false); //True para logado e falso para deslogado
     const [typeUser, setTypeUser] = useState(1); //0 para empresa, 1 para usuário, 2 para adm
 
-
+    function handleLogout() {
+        setFezLogin(false);
+        setTypeUser(2);
+    
+        localStorage.removeItem('fezLogin');
+        localStorage.removeItem('typeUser');
+        window.location.reload();
+    }
 
     return (
 
@@ -22,9 +30,10 @@ function App() {
             {/* <Login/> */}
             <Router>
                 <Routes>
-                    <Route path="/" element={<Home fezLogin={fezLogin} typeUser={typeUser} setFezLogin={setFezLogin} setTypeUser={setTypeUser} />} />
+                    <Route path="/" element={<Home fezLogin={fezLogin} typeUser={typeUser} setFezLogin={setFezLogin} setTypeUser={setTypeUser} handleLogout={handleLogout}/>} />
                     <Route path="/login" element={<Login setFezLogin={setFezLogin} setTypeUser={setTypeUser} />} />
-                    <Route path="/vacany" element={<JobForms />} />
+                    <Route path="/vacany" element={<JobForms typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />} />
+                    <Route path="/allvacany" element={<AllVacany typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />
                 </Routes>
             </Router>
         </>

@@ -1,10 +1,14 @@
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+
+import PropTypes from 'prop-types'
 import '../styles/JobForms.css'
-export default function JobForms() {
+
+
+export default function JobForms( { typeUser, fezLogin, handleLogout } ) {
     return (
         <>
-            <Header/>
+            <Header typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />
             <main className='jobforms'>
                 <div id="add-form-container" className="container">
                     <div className="row">
@@ -120,4 +124,10 @@ export default function JobForms() {
             <Footer/>
         </>
     );
+}
+
+JobForms.prototype = {
+    typeUser: PropTypes.string.isRequired,
+    fezLogin: PropTypes.bool.isRequired,
+    handleLogout: PropTypes.func.isRequired
 }

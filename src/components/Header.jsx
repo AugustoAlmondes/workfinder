@@ -34,7 +34,7 @@ function Header({ typeUser, fezLogin, handleLogout }) {
                             (
                                 <li className="l3 font-1 animate__animated animate__fadeIn animate__delay-1s">
                                     {/* Vagas */}
-                                    <Link to="/vacany">Vagas</Link>
+                                    <Link to="/allvacany">Vagas</Link>
                                 </li>
                             ) : (
                                 <li style={{ display: 'none' }}></li>
@@ -44,7 +44,7 @@ function Header({ typeUser, fezLogin, handleLogout }) {
                     {(typeUser === 0 || typeUser === 2 || !fezLogin) &&
                         (
                             <li id="cadVaga" className="l4 font-1 animate__animated animate__fadeIn animate__delay-1s">
-                                <a id="cadVagaLink" href="cadEmpresa.html" target="_blank">Nova Vaga</a>
+                                <Link to="/vacany">Cadastrar Vaga</Link>
                             </li>
                         )
                     }
