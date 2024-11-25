@@ -1,11 +1,12 @@
 import Home from './Home';
 import Login from './Login';
 import JobForms from './JobForms';
+import AllVacany from './AllJobs';
+import JobApplicationForm from './JobApplicationForm';
 // import TESTE from './Teste';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
-import AllVacany from './AllJobs';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                     <Route path="/login" element={<Login setFezLogin={setFezLogin} setTypeUser={setTypeUser} />} />
                     <Route path="/vacany" element={<JobForms typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />} />
                     <Route path="/allvacany" element={<AllVacany typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />
+                    <Route path="/applyvacany" element={<JobApplicationForm typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />
                 </Routes>
             </Router>
         </>
