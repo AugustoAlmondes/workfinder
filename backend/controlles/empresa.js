@@ -24,3 +24,7 @@ export const addEmpresa = (req, res) => {
         return res.status(201).json({ message: "Empresa cadastrado com sucesso" });
     });
 };
+
+export const addVacany = (req, res)  => {
+    const
+}

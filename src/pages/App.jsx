@@ -26,7 +26,7 @@ function App() {
     return (
 
         <>
-            {console.log(fezLogin, typeUser)}
+            {/* {console.log(fezLogin, typeUser)} */}
             {/* <Home /> */}
             {/* <Login/> */}
             <Router>

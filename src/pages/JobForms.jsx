@@ -1,6 +1,6 @@
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-
+import { toast, ToastContainer } from 'react-toastify';
 import PropTypes from 'prop-types'
 import '../styles/JobForms.css'
 import { useState } from 'react';
@@ -27,10 +27,47 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
     function handleChange(e) {
         const { name, value } = e.target;
         setDataVacany(prevData => ({ ...prevData, [name]: value }))
+
+    }
+
+    async function handleSubmit() {
+        try {
+            const response = await fetch("http://localhost:8800/users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dataVacany)
+            });
+            const result = await response.json();
+
+            if (response.ok) {
+                console.log(result.message);
+                toast.success("Vaga Cadastrada com sucesso", {
+                    className: 'toast-success',
+                });
+            } else {
+                console.log("Erro ao cadastrar vaga: ", + result.error)
+            }
+        } catch (error) {
+            console.log("Erro ao conectar ao servidor", error);
+        };
     }
 
     return (
         <>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+
             <Header typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />
             <main className='jobforms'>
                 <div id="add-form-container" className="container">
@@ -90,7 +127,7 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
                                         value={dataVacany.contractType}
                                         onChange={handleChange}
                                     >
-                                        <option value="none" selected> Selecione uma Opção </option>
+                                        <option value="none"> Selecione uma Opção </option>
                                         <option value="CLT">CLT</option>
                                         <option value="PJ">PJ</option>
                                         <option value="JA">Jovem Aprendiz</option>
@@ -108,7 +145,7 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
                                         value={dataVacany.modality}
                                         onChange={handleChange}
                                     >
-                                        <option value="none" selected>Selecione uma opção</option>
+                                        <option value="none">Selecione uma opção</option>
                                         <option value="presencial">Presencial</option>
                                         <option value="ead">Home Office</option>
                                         <option value="hibrido">Híbrido</option>
@@ -183,13 +220,13 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
                                         htmlFor="yesDriver">Sim</label>
                                     <input type="radio" name="driver-license" id="noDriver" value="não" checked /> <label
                                         htmlFor="noDriver">Não</label> */}
-                                    <select 
-                                        className="form-control" 
-                                        name="license-type" 
+                                    <select
+                                        className="form-control"
+                                        name="cnh"
                                         id="license-type"
                                         value={dataVacany.cnh}
                                         onChange={handleChange}
-                                        >
+                                    >
                                         <option value="none"> Selecione uma Opção </option>
                                         <option value="não">Não</option>
                                         <option value="A">A</option>
@@ -207,47 +244,53 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
                                         htmlFor="yesSalary">Sim</label>
                                     <input type="radio" name="salary" id="noSalary" value="não" /> <label
                                         htmlFor="noSalary">Não</label> */}
-                                    <input 
-                                        type="text" 
-                                        className="form-control" 
-                                        id="salary" 
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="salary"
                                         name="salary"
                                         placeholder="Digite o salário"
                                         required
                                         value={dataVacany.salary}
                                         onChange={handleChange}
-                                        />
+                                    />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="benefits">Benefícios:</label>
-                                    <textarea 
-                                        type="text" 
-                                        className="form-control"   
-                                        id="benefits" 
+                                    <textarea
+                                        type="text"
+                                        className="form-control"
+                                        id="benefits"
                                         name="benefits"
-                                        placeholder="Descreva os benefícios da vaga ..." 
+                                        placeholder="Descreva os benefícios da vaga ..."
                                         required
                                         value={dataVacany.benefits}
                                         onChange={handleChange}
-                                        ></textarea>
+                                    ></textarea>
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="description">Descrição da vaga:</label>
-                                    <textarea 
-                                        type="text"    
-                                        className="form-control" 
-                                        id="description" 
+                                    <textarea
+                                        type="text"
+                                        className="form-control"
+                                        id="description"
                                         name="description"
-                                        placeholder="Descreva as atividades do desenvolvedor..." 
+                                        placeholder="Descreva as atividades do desenvolvedor..."
                                         required
                                         style={{ height: "200px" }}
                                         value={dataVacany.description}
                                         onChange={handleChange}
-                                        ></textarea>
+                                    ></textarea>
                                 </div>
 
-                                <input type="button" value="Submeter vaga" id="enviar" className="enviar-button" />
+                                <input
+                                    type="submit"
+                                    value="Submeter vaga"
+                                    id="enviar"
+                                    className="enviar-button"
+                                    onClick={handleSubmit}
+                                />
 
                             </form>
 
