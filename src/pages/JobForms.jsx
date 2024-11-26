@@ -10,6 +10,7 @@ import { useState } from 'react';
 export default function JobForms({ typeUser, fezLogin, handleLogout }) {
 
     const [dataVacany, setDataVacany] = useState({
+        enterprise:'',
         title: '',
         ability: '',
         local: '',
@@ -30,9 +31,11 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
 
     }
 
-    async function handleSubmit() {
+    async function handleSubmit(e) {
+        e.preventDefault();
+        console.log(dataVacany);
         try {
-            const response = await fetch("http://localhost:8800/users", {
+            const response = await fetch("http://localhost:8800/empresa/vacany", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -75,7 +78,21 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
                         <div id="form-box" className="col-md-12">
                             <h2>Preencha os dados da melhor forma possível para exibição de sua vaga!</h2>
 
-                            <form action="">
+                            <form onSubmit={handleSubmit}>
+                                <div className="form-group">
+                                    <label htmlFor="enterprise">Nome da Empresa:</label>
+                                    <input
+                                        id="enterprise"
+                                        name="enterprise"
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Digite o nome da empresa"
+                                        required
+                                        value={dataVacany.enterprise}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
                                 <div className="form-group">
                                     <label htmlFor="titleNewVacany">Título da vaga:</label>
                                     <input
@@ -289,7 +306,6 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
                                     value="Submeter vaga"
                                     id="enviar"
                                     className="enviar-button"
-                                    onClick={handleSubmit}
                                 />
 
                             </form>
