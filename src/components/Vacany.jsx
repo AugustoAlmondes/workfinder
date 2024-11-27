@@ -1,23 +1,35 @@
 // import { BiGeoAlt, BiBuilding, BiDollar } from 'react-icons/bi';
 // import { BiGeoAlt } from 'react-icons/bi';
 import '../styles/Vacany.css';
+import PropTypes from 'prop-types';
 
-export default function Vacany() {
+export default function Vacany({ listDataVvacany }) {
+    console.log("Aqui é a lista: ", listDataVvacany);
+
     return (
         <>
             <div className='card allvacany'>
+
+                <div className="foto-card default_pointer_cs">
+                    <h3 className="default_pointer_cs">{listDataVvacany.enterprise}</h3>
+                </div>
+
+                <h4 className="default_pointer_cs">{listDataVvacany.title}</h4>
+
+                <ul className="requisitos default_pointer_cs">
+                    <li className="default_pointer_cs">{listDataVvacany.contractType}</li>
+                    <li className="default_pointer_cs">{listDataVvacany.modality}</li>
+                    <li className="default_pointer_cs">{listDataVvacany.areaActivity}</li>
+                </ul>
                 <ul className="info-vaga">
                     <li>
-                        {/* <BiGeoAlt size={16} /> */}
-                        Picos-PI
+                        Local: {listDataVvacany.local}
                     </li>
                     <li>
-                        {/* <BiBuilding size={16} /> */}
-                        2 Vagas
+                        Quantidade de Vagas: {listDataVvacany.amount}
                     </li>
                     <li>
-                        {/* <BiDollar size={16} /> */}
-                        Não Informado
+                        Salário: {listDataVvacany.salary}
                     </li>
 
                     <h4 className="acessar-card">Acessar</h4>
@@ -25,4 +37,8 @@ export default function Vacany() {
             </div>
         </>
     );
+}
+
+Vacany.propTypes = {
+    listDataVvacany: PropTypes.arrayOf(PropTypes.string)
 }

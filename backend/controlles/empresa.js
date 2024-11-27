@@ -55,3 +55,12 @@ export const addVacany = (req, res) => {
         return res.status(201).json({ message: "Vaga cadastrada com sucesso" });
     });
 }
+
+export const getVacany = (_, res) => {
+    const q = "SELECT * FROM vaga";
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err);        
+        return res.status(200).json(data);
+    });
+}

@@ -51,9 +51,11 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log("Dados a serem enviados:", dataVacany);
-        try {
-            const response = await fetch("http://localhost:8800/empresa/vacany", {
+        if (fezLogin) {
+            console.log("Ta logado");
+            console.log("Dados a serem enviados:", dataVacany);
+            try {
+                const response = await fetch("http://localhost:8800/empresa/vacany", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -75,8 +77,12 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
             console.log("Erro ao conectar ao Servidor", error);
             toast.error("Erro ao conectar ao servidor. Tente novamente mais tarde.");
         };
+    } else
+    {
+        toast.error("Faça Login para cadastrar uma vaga");
     }
-
+}
+    
     return (
         <>
             <ToastContainer
@@ -344,4 +350,4 @@ JobForms.prototype = {
     typeUser: PropTypes.string.isRequired,
     fezLogin: PropTypes.bool.isRequired,
     handleLogout: PropTypes.func.isRequired
-}
+};

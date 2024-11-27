@@ -6,7 +6,8 @@ export default function VagaCard({nomeEmpresaVaga, cargoVaga}) {
         <>
             <div className="card">
                 <div className="foto-card">
-                    <img src="../imagens/assai.png" alt="logo_empresa" />
+                    {/* <img src="../imagens/assai.png" alt="logo_empresa" /> */}
+                    
                     <h3>{nomeEmpresaVaga}</h3>
                 </div>
                 <h4>{cargoVaga}</h4>

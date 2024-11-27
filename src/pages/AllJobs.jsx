@@ -3,9 +3,25 @@ import Header from "../components/Header";
 import Vacany from "../components/Vacany";
 import '../styles/Vacany.css'
 
+import { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 
 export default function AllVacany({ typeUser, fezLogin, handleLogout }) {
+
+    const [listDataVvacany, setListDataVacany] = useState([]);
+
+
+    useEffect(() => {
+        const getAllVacany = async () => {
+            const response = await fetch('http://localhost:8800/empresa/vacany');
+            const data = await response.json();
+            setListDataVacany(data);
+            // console.log(data);
+            
+        }
+        getAllVacany();
+    }, [])
+
     return (
         <>
         <Header typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />
@@ -26,12 +42,12 @@ export default function AllVacany({ typeUser, fezLogin, handleLogout }) {
 
                 <h4 className="subtitulo-vaga">Todas as Vagas</h4>
                 <div className="grid-vagas">
-                    <Vacany />
-                    <Vacany />
-                    <Vacany />
-                    <Vacany />
-                    <Vacany />
-                    <Vacany />
+                    {/* <Vacany listDataVvacany={listDataVvacany} /> */}
+                    {
+                        listDataVvacany.map((item, index) => (
+                            <Vacany key={index} listDataVvacany={item} />
+                        ))
+                    }
                 </div>
             </main>
 

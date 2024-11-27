@@ -15,11 +15,12 @@ import PropTypes from "prop-types"
 // import { useEffect } from 'react';
 
 import '../styles/Home.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { LiaSitemapSolid } from 'react-icons/lia';
 
 
 
-export default function Home({fezLogin, typeUser, setFezLogin, setTypeUser, handleLogout}) {
+export default function Home({ fezLogin, typeUser, setFezLogin, setTypeUser, handleLogout }) {
 
     useEffect(() => {
         const savedLogin = localStorage.getItem('fezLogin');
@@ -30,15 +31,34 @@ export default function Home({fezLogin, typeUser, setFezLogin, setTypeUser, hand
         }
     })
 
-    
+    useEffect(() => {
+        const getAllVacany = async () => {
+            const response = await fetch('http://localhost:8800/empresa/vacany');
+            const data = await response.json();
+            setListDataVacany(data);
+            console.log(data);
+
+        }
+        getAllVacany();
+    }, [])
+
+    const [listDataVacany, setListDataVacany] = useState([]);
+
     let vagasCards = [];
     let nomeEmpresaVaga = ['Assai Atacadista', 'Engipec', 'Atacadão', 'Virtex', 'Carvalho', 'Moto Moura']
     let cargoVaga = ['Analista de Rede', 'Vendedor', 'Faxineiro', 'Atendente', 'Auxiliar de RH', 'Atendente']
-
+    var contador = 0
     // TEMPORÁRIO
-    for (let index = 0; index < 6; index++) {
-        vagasCards.push(<VagaCard key={index} nomeEmpresaVaga={nomeEmpresaVaga[index]} cargoVaga={cargoVaga[index]} />);
-    }
+    // for (let index = 0; index < 6; index++) {
+    //     vagasCards.push(<VagaCard key={index} nomeEmpresaVaga={listDataVacany.enterprise} cargoVaga={listDataVacany.title} />);
+    //     contador = contador + 1
+    // }
+    listDataVacany.some((element) => {
+        vagasCards.push(<VagaCard key={contador} nomeEmpresaVaga={element.enterprise} cargoVaga={element.title} />);
+        contador += 1;
+        return contador === 6; // Para ao atingir a condição
+    });
+
     return (
         <>
             <Header typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />
@@ -48,10 +68,10 @@ export default function Home({fezLogin, typeUser, setFezLogin, setTypeUser, hand
                 <section className='part-1' style={{
                     minHeight: "100vh",
                     display: 'flex',
-                    alignItems:'center',
-                    justifyContent:'center',
-                    gap:'50px'
-                    }}>
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '50px'
+                }}>
 
                     {typeUser !== 0 ?
                         (
@@ -90,13 +110,13 @@ export default function Home({fezLogin, typeUser, setFezLogin, setTypeUser, hand
 
                                 <div className="beneficios-cadastro">
                                     <ul
-                                    style={{
-                                        listStyle: 'none',
-                                        fontSize:'20px',
-                                        display:'flex',
-                                        flexDirection:'column',
-                                        gap:'20px'
-                                    }}
+                                        style={{
+                                            listStyle: 'none',
+                                            fontSize: '20px',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: '20px'
+                                        }}
                                     >
                                         <li><i className="bi bi-person-plus-fill"></i> Alcance um grande número de candidatos em diversas áreas</li>
                                         <li><i className="bi bi-lightning-charge-fill"></i> Publique suas vagas rapidamente com apenas alguns cliques</li>
@@ -264,7 +284,7 @@ export default function Home({fezLogin, typeUser, setFezLogin, setTypeUser, hand
             <Footer />
         </>
     )
-}  
+}
 
 Home.propTypes = {
     fezLogin: PropTypes.bool.isRequired,
