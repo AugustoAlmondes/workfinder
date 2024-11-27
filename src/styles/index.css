@@ -205,25 +205,6 @@
     cursor: pointer;
     transition: all 0.2s;
 
-    .foto-card {
-        /* padding-top: 20px; */
-        height: 120px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-
-        img {
-            border-radius: 50%;
-            height: 100px;
-        }
-
-        h3 {
-            font-weight: 600;
-        }
-
-    }
-
     .requisitos {
         list-style: none;
         display: inline-flex;
@@ -240,20 +221,6 @@
             font-size: 14px;
             background-color: rgb(111, 85, 65);
             border-radius: 20px;
-        }
-    }
-
-    .info-vaga {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        list-style: none;
-        text-align: start;
-        padding: 0 20px;
-        font-weight: 300;
-
-        li {
-            width: 200px;
         }
     }
 

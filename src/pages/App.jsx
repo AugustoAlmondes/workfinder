@@ -17,18 +17,13 @@ function App() {
     function handleLogout() {
         setFezLogin(false);
         setTypeUser(2);
-    
         localStorage.removeItem('fezLogin');
         localStorage.removeItem('typeUser');
         window.location.reload();
     }
 
     return (
-
         <>
-            {/* {console.log(fezLogin, typeUser)} */}
-            {/* <Home /> */}
-            {/* <Login/> */}
             <Router>
                 <Routes>
                     <Route path="/" element={<Home fezLogin={fezLogin} typeUser={typeUser} setFezLogin={setFezLogin} setTypeUser={setTypeUser} handleLogout={handleLogout}/>} />

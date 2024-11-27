@@ -23,13 +23,13 @@ export default function Vacany({ listDataVvacany }) {
                 </ul>
                 <ul className="info-vaga">
                     <li>
-                        Local: {listDataVvacany.local}
+                        <span>Local:</span> {listDataVvacany.local}
                     </li>
                     <li>
-                        Quantidade de Vagas: {listDataVvacany.amount}
+                        <span>Quantidade de Vagas:</span> {listDataVvacany.amount}
                     </li>
                     <li>
-                        Salário: {listDataVvacany.salary}
+                    <span>Salário:</span> {listDataVvacany.salary}
                     </li>
 
                     <h4 className="acessar-card">Acessar</h4>

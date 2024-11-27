@@ -16,8 +16,6 @@ export default function AllVacany({ typeUser, fezLogin, handleLogout }) {
             const response = await fetch('http://localhost:8800/empresa/vacany');
             const data = await response.json();
             setListDataVacany(data);
-            // console.log(data);
-            
         }
         getAllVacany();
     }, [])

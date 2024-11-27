@@ -64,10 +64,14 @@
         list-style: none;
         text-align: start;
         padding: 0 20px;
+        gap: 10px;
         font-weight: 300;
 
         li {
             width: 200px;
+        }
+        span{
+            font-weight: bold;
         }
     }
 
