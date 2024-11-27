@@ -19,7 +19,7 @@ export const addUser = (req, res) => {
 
     db.query(q, values, (err, _) => {
         if (err) {
-            console.log(err);
+            console.log(err, _);
             return res.status(500).json({ error: "Erro ao adicionar usuário" });
         }
         return res.status(201).json({ message: "Usuário cadastrado com sucesso" });
@@ -29,12 +29,12 @@ export const addUser = (req, res) => {
 
 export const loginUser = (req, res) => {
     const { email, senha, isEnterprise } = req.body;
-    
+
     let typeUserLogin = 'empresas';
-    if (!isEnterprise){typeUserLogin = 'usuarios';}
-    
+    if (!isEnterprise) { typeUserLogin = 'usuarios'; }
+
     const q = `SELECT * FROM ${typeUserLogin} WHERE email = ?`;
-    
+
     db.query(q, [email], (err, data) => {
         if (err) {
             return res.status(500).json({ erro: "Erro no servidor" });

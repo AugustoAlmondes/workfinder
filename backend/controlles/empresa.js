@@ -15,6 +15,9 @@ export const addEmpresa = (req, res) => {
     const q = "INSERT INTO empresas (nome_empresa, nome_fantasia, cnpj, inscricao_estadual, inscricao_municipal, telefone, cep, endereco, email, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     const values = [nome_empresa, nome_fantasia, cnpj, inscricao_estadual, inscricao_municipal, telefone, cep, endereco, email, senha];
 
+    console.log("Comando SQL:", q);
+    console.log("Valores para o SQL:", values);
+
     db.query(q, values, (err, result) => {
         if (err) {
             console.log(err);
@@ -26,15 +29,19 @@ export const addEmpresa = (req, res) => {
 };
 
 export const addVacany = (req, res) => {
-    const {
-        empresa, titulo, habilidades_qualificacoes, localizacao,
-        tipo_contratacao, modalidade_trabalho, quantidade_vagas,
-        area_atuacao, pcd, tipo_carteira_motorista, salario,
-        beneficios, descricao } = req.body
+    // const {
+    //     empresa, titulo, habilidades_qualificacoes, localizacao,
+    //     tipo_contratacao, modalidade_trabalho, quantidade_vagas,
+    //     area_atuacao, pcd, tipo_carteira_motorista, salario,
+    //     beneficios, descricao } = req.body;
+    const { enterprise, title, ability, local, contractType, modality, amount, areaActivity, pcd, cnh, salary, benefits, description } = req.body;
 
-    const q = "INSERT INTO vaga (empresa, titulo, habilidades_qualificacoes, localizacao, tipo_contratacao, modalidade_trabalho, quantidade_vagas, area_atuacao, pcd, tipo_carteira_motorista, salario, beneficios, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // const q = "INSERT INTO vaga (empresa, titulo, habilidades_qualificacoes, localizacao, tipo_contratacao, modalidade_trabalho, quantidade_vagas, area_atuacao, pcd, tipo_carteira_motorista, salario, beneficios, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    const values = [empresa, titulo, habilidades_qualificacoes, localizacao, tipo_contratacao, modalidade_trabalho, quantidade_vagas, area_atuacao, pcd, tipo_carteira_motorista, salario, beneficios, descricao]
+    const q = "INSERT INTO vaga (enterprise, title, ability, local, contractType, modality, amount, areaActivity, pcd, cnh, salary, benefits, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    // const values = [empresa, titulo, habilidades_qualificacoes, localizacao, tipo_contratacao, modalidade_trabalho, quantidade_vagas, area_atuacao, pcd, tipo_carteira_motorista, salario, beneficios, descricao]
+    const values = [enterprise, title, ability, local, contractType, modality, amount, areaActivity, pcd, cnh, salary, benefits, description];
 
     console.log("Comando SQL:", q);
     console.log("Valores para o SQL:", values);

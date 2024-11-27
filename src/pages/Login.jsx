@@ -138,6 +138,7 @@ export default function Login({ setFezLogin, setTypeUser }) {
             };
         }
         else if (frameLogin === 0) {
+            console.log("Dados a serem enviados:", dataEmpresa);
             try {
                 const response = await fetch("http://localhost:8800/empresa", {
                     method: "POST",

@@ -10,7 +10,7 @@ import { useState } from 'react';
 export default function JobForms({ typeUser, fezLogin, handleLogout }) {
 
     const [dataVacany, setDataVacany] = useState({
-        enterprise:'',
+        enterprise: '',
         title: '',
         ability: '',
         local: '',
@@ -25,6 +25,24 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
         description: ''
     })
 
+    const clearInput = () => {
+        setDataVacany({
+            enterprise: '',
+            title: '',
+            ability: '',
+            local: '',
+            contractType: '',
+            modality: '',
+            amount: '',
+            areaActivity: '',
+            pcd: 'não',
+            cnh: '',
+            salary: '',
+            benefits: '',
+            description: ''
+        });
+    }
+
     function handleChange(e) {
         const { name, value } = e.target;
         setDataVacany(prevData => ({ ...prevData, [name]: value }))
@@ -33,7 +51,7 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log(dataVacany);
+        console.log("Dados a serem enviados:", dataVacany);
         try {
             const response = await fetch("http://localhost:8800/empresa/vacany", {
                 method: "POST",
@@ -49,11 +67,13 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
                 toast.success("Vaga Cadastrada com sucesso", {
                     className: 'toast-success',
                 });
+                clearInput();
             } else {
-                console.log("Erro ao cadastrar vaga: ", + result.error)
+                console.log("Erro ao cadastrar Vaga: ", result.error)
             }
         } catch (error) {
-            console.log("Erro ao conectar ao servidor", error);
+            console.log("Erro ao conectar ao Servidor", error);
+            toast.error("Erro ao conectar ao servidor. Tente novamente mais tarde.");
         };
     }
 
