@@ -42,7 +42,6 @@ export default function AllVacany({ typeUser, fezLogin, handleLogout }) {
 
                 <h4 className="subtitulo-vaga">Todas as Vagas</h4>
                 <div className="grid-vagas">
-                    {/* <Vacany listDataVvacany={listDataVvacany} /> */}
                     {
                         listDataVvacany.map((item, index) => (
                             <Vacany key={index} listDataVvacany={item} />

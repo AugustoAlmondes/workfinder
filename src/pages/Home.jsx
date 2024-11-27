@@ -45,8 +45,8 @@ export default function Home({ fezLogin, typeUser, setFezLogin, setTypeUser, han
     const [listDataVacany, setListDataVacany] = useState([]);
 
     let vagasCards = [];
-    let nomeEmpresaVaga = ['Assai Atacadista', 'Engipec', 'Atacadão', 'Virtex', 'Carvalho', 'Moto Moura']
-    let cargoVaga = ['Analista de Rede', 'Vendedor', 'Faxineiro', 'Atendente', 'Auxiliar de RH', 'Atendente']
+    // let nomeEmpresaVaga = ['Assai Atacadista', 'Engipec', 'Atacadão', 'Virtex', 'Carvalho', 'Moto Moura']
+    // let cargoVaga = ['Analista de Rede', 'Vendedor', 'Faxineiro', 'Atendente', 'Auxiliar de RH', 'Atendente']
     var contador = 0
     // TEMPORÁRIO
     // for (let index = 0; index < 6; index++) {
