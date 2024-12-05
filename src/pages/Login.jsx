@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import PropTypes from 'prop-types';
 import 'react-toastify/dist/ReactToastify.css'; // Estilos do Toast
+import bcrypt from 'bcryptjs';
 // import { useEffect } from "react";
 
 import '../styles/Login.css'
@@ -113,12 +114,19 @@ export default function Login({ setFezLogin, setTypeUser }) {
             }
 
             try {
+                // dataUser.senha
+                const saltRounds = 10; // Define o número de rounds para gerar o salt
+                const hashedSenha = await bcrypt.hash(dataUser.senha, saltRounds);
+        
+                // Substitui a senha original pelo hash no objeto dataUser
+                const dataUserHashed = { ...dataUser, senha: hashedSenha };
+
                 const response = await fetch("http://localhost:8800/users", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(dataUser)
+                    body: JSON.stringify(dataUserHashed)
                 });
                 const result = await response.json();
 
