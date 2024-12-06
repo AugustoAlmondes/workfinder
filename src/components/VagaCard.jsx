@@ -1,13 +1,14 @@
 import '../styles/cardVaga.css'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-export default function VagaCard({nomeEmpresaVaga, cargoVaga}) {
+export default function VagaCard({ listDataVvacany, nomeEmpresaVaga, cargoVaga }) {
     return (
         <>
             <div className="card">
                 <div className="foto-card">
                     {/* <img src="../imagens/assai.png" alt="logo_empresa" /> */}
-                    
+
                     <h3>{nomeEmpresaVaga}</h3>
                 </div>
                 <h4>{cargoVaga}</h4>
@@ -44,13 +45,20 @@ export default function VagaCard({nomeEmpresaVaga, cargoVaga}) {
                         Não Informado
                     </li>
                 </ul>
-                <h4 className="acessar-card">Acessar</h4>
+                <Link to={{
+                    pathname: "/infojob",
+                }}
+                    state={{ jobData: listDataVvacany }}
+                    className="acessar-card">
+                    <h4>Acessar</h4>
+                </Link>
             </div>
         </>
     );
 }
 
 VagaCard.propTypes = {
+    listDataVvacany: PropTypes.arrayOf(PropTypes.string),
     nomeEmpresaVaga: PropTypes.arrayOf(PropTypes.string),
     cargoVaga: PropTypes.arrayOf(PropTypes.string)
 };

@@ -11,12 +11,13 @@ import ImagemSlot4 from '../assets/1694615.png'
 import ImagemSlot5 from '../assets/2645897.png'
 
 import PropTypes from "prop-types"
+import { Link } from 'react-router-dom';
 // import { useState } from 'react';
 // import { useEffect } from 'react';
 
 import '../styles/Home.css';
 import { useEffect, useState } from 'react';
-import { LiaSitemapSolid } from 'react-icons/lia';
+// import { LiaSitemapSolid } from 'react-icons/lia';
 
 
 
@@ -47,16 +48,16 @@ export default function Home({ fezLogin, typeUser, setFezLogin, setTypeUser, han
     let vagasCards = [];
     // let nomeEmpresaVaga = ['Assai Atacadista', 'Engipec', 'Atacadão', 'Virtex', 'Carvalho', 'Moto Moura']
     // let cargoVaga = ['Analista de Rede', 'Vendedor', 'Faxineiro', 'Atendente', 'Auxiliar de RH', 'Atendente']
-    var contador = 0
+    var contador = 0;
     // TEMPORÁRIO
     // for (let index = 0; index < 6; index++) {
     //     vagasCards.push(<VagaCard key={index} nomeEmpresaVaga={listDataVacany.enterprise} cargoVaga={listDataVacany.title} />);
     //     contador = contador + 1
     // }
-    listDataVacany.some((element) => {
-        vagasCards.push(<VagaCard key={contador} nomeEmpresaVaga={element.enterprise} cargoVaga={element.title} />);
+    listDataVacany.reverse().some((element) => {
+        vagasCards.push(<VagaCard key={contador} listDataVvacany={element} nomeEmpresaVaga={element.enterprise} cargoVaga={element.title} />);
         contador += 1;
-        return contador === 6; // Para ao atingir a condição
+        return contador === 6;
     });
 
     return (
@@ -91,9 +92,11 @@ export default function Home({ fezLogin, typeUser, setFezLogin, setTypeUser, han
                                 </div>
 
                                 <div className="vermais-card">
-                                    <button>
-                                        Ver mais vagas
-                                    </button>
+                                    <Link to='/allvacany' style={{ textDecoration: 'none' }}>
+                                        <button>
+                                            Ver mais vagas
+                                        </button>
+                                    </Link>
                                 </div>
                             </>
                         ) :
@@ -127,7 +130,9 @@ export default function Home({ fezLogin, typeUser, setFezLogin, setTypeUser, han
                                 </div>
 
                                 <div className="cadastrar-vaga">
-                                    <button className="olhar-Vagas">Cadastrar uma Vaga Agora</button>
+                                    <Link to='vacany' className="olhar-Vagas" style={{ textDecoration: 'none' }}>
+                                        <button>Cadastrar uma Vaga Agora</button>
+                                    </Link>
                                 </div>
                             </>
                         )
@@ -178,9 +183,13 @@ export default function Home({ fezLogin, typeUser, setFezLogin, setTypeUser, han
                                 {
                                     typeUser != 0 ?
                                         (
-                                            <button className="olhar-Vagas">Olhar Vagas</button>
+                                            <Link to='/allvacany' style={{ textDecoration: 'none' }}>
+                                                <button className="olhar-Vagas">Olhar Vagas</button>
+                                            </Link>
                                         ) : (
-                                            <button className="olhar-Vagas">Cadastrar Vagas</button>
+                                            <Link to='/vacany'>
+                                                <button className="olhar-Vagas">Cadastrar Vagas</button>
+                                            </Link>
                                         )
                                 }
                                 {
@@ -188,7 +197,9 @@ export default function Home({ fezLogin, typeUser, setFezLogin, setTypeUser, han
                                         (
                                             <button className="registar-se">Ver Perfil</button>
                                         ) : (
-                                            <button className="registar-se">Cadastre-se</button>
+                                            <Link to='/login' style={{ textDecoration: 'none' }}>
+                                                <button className="registar-se">Cadastre-se</button>
+                                            </Link>
                                         )
                                 }
                             </div>

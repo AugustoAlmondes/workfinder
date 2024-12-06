@@ -1,7 +1,7 @@
 import '../styles/header.css'
 import Logo from '../assets/Logomarca.png'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom';
+import { Link, ScrollRestoration } from 'react-router-dom';
 // import handleLogout from '../pages/Home'
 
 function Header({ typeUser, fezLogin, handleLogout }) {
@@ -18,14 +18,15 @@ function Header({ typeUser, fezLogin, handleLogout }) {
                         {/* <a href="index.html">Home</a> */}
                         <Link to={"/"}>Home</Link>
                     </li>
-                    <li className="l2 font-1 animate__animated animate__fadeIn animate__delay-1s" onClick={handleLogout} >
+                    <li className="l2 font-1 animate__animated animate__fadeIn animate__delay-1s" >
                         {
                             fezLogin ?
                                 (
-                                    'Sair'
+                                    <Link to="/" onClick={handleLogout}>Sair</Link>
+                                    // 'Sair'
                                 ) :
                                 (
-                                    'Sobre'
+                                    <p style={{ margin: '0' }}>Sobre</p>
                                 )
                         }
                     </li>

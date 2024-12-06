@@ -23,7 +23,15 @@ export default function InfoJob({ typeUser, fezLogin, handleLogout }) {
                 </div>
 
                 <div className="display-job-info">
-                    <h3>Informações Principais </h3>
+                    <h3>Informações  Principais</h3>
+                    <div className="job-info-2">
+                        <p><span>Descrição:</span> {jobData.description}</p>
+                        <p><span>Benefícios:</span> {jobData.benefits}</p>
+                    </div>
+                </div>
+
+                <div className="display-job-info">
+                    <h3>Informações Adicionais </h3>
                     <div className="job-info">
                         <p><span>Empresa:</span> {jobData.enterprise}</p>
                         <p><span>Título:</span> {jobData.title}</p>
@@ -39,17 +47,19 @@ export default function InfoJob({ typeUser, fezLogin, handleLogout }) {
                     </div>
                 </div>
 
-                <div className="display-job-info">
-                    <h3>Informações Adicionais </h3>
-                    <div className="job-info-2">
-                        <p><span>Descrição:</span> {jobData.description}</p>
-                        <p><span>Benefícios:</span> {jobData.benefits}</p>
-                    </div>
-                </div>
-
-                <Link to='/applyvacany'>
-                <button className="candidatar">Candidatar</button>
-                </Link>
+                {
+                    fezLogin ?
+                        (
+                            <Link to='/applyvacany' style={{textDecoration: 'none'}}>
+                                <button className="candidatar">Candidatar</button>
+                            </Link>
+                        ) :
+                        (
+                            <Link to='/login' style={{textDecoration: 'none'}}>
+                                <button className="candidatar">Candidatar</button>
+                            </Link>
+                        )
+                }
             </main>
             <Footer />
         </>

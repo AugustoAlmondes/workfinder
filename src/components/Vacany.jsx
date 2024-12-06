@@ -74,5 +74,6 @@ export default function Vacany({ listDataVvacany, fezLogin }) {
 }
 
 Vacany.propTypes = {
-    listDataVvacany: PropTypes.arrayOf(PropTypes.string)
+    listDataVvacany: PropTypes.arrayOf(PropTypes.string),
+    fezLogin: PropTypes.bool
 }
