@@ -2,6 +2,7 @@
 // import { BiGeoAlt } from 'react-icons/bi';
 import '../styles/Vacany.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default function Vacany({ listDataVvacany }) {
     console.log("Aqui é a lista: ", listDataVvacany);
@@ -29,10 +30,17 @@ export default function Vacany({ listDataVvacany }) {
                         <span>Quantidade de Vagas:</span> {listDataVvacany.amount}
                     </li>
                     <li>
-                    <span>Salário:</span> {listDataVvacany.salary}
+                        <span>Salário:</span> {listDataVvacany.salary}
                     </li>
-
-                    <h4 className="acessar-card">Acessar</h4>
+                    <Link
+                        to={{
+                            pathname: "/infojob",
+                        }}
+                        state={{ jobData: listDataVvacany }}
+                        className="acessar-card"
+                    >
+                        <h4>Acessar</h4>
+                    </Link>
                 </ul>
             </div>
         </>

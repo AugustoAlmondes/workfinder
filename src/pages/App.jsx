@@ -3,6 +3,7 @@ import Login from './Login';
 import JobForms from './JobForms';
 import AllVacany from './AllJobs';
 import JobApplicationForm from './JobApplicationForm';
+import InfoJob from './InfoJob';
 // import TESTE from './Teste';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -31,6 +32,7 @@ function App() {
                     <Route path="/vacany" element={<JobForms typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />} />
                     <Route path="/allvacany" element={<AllVacany typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />
                     <Route path="/applyvacany" element={<JobApplicationForm typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />
+                    <Route path="/infojob" element={<InfoJob typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />
                 </Routes>
             </Router>
         </>

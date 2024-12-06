@@ -52,37 +52,41 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
     async function handleSubmit(e) {
         e.preventDefault();
         if (fezLogin) {
-            console.log("Ta logado");
-            console.log("Dados a serem enviados:", dataVacany);
-            try {
-                const response = await fetch("http://localhost:8800/empresa/vacany", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(dataVacany)
-            });
-            const result = await response.json();
+            if (typeUser === 0) {
 
-            if (response.ok) {
-                console.log(result.message);
-                toast.success("Vaga Cadastrada com sucesso", {
-                    className: 'toast-success',
-                });
-                clearInput();
+                console.log("Ta logado");
+                console.log("Dados a serem enviados:", dataVacany);
+                try {
+                    const response = await fetch("http://localhost:8800/empresa/vacany", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(dataVacany)
+                    });
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        console.log(result.message);
+                        toast.success("Vaga Cadastrada com sucesso", {
+                            className: 'toast-success',
+                        });
+                        clearInput();
+                    } else {
+                        console.log("Erro ao cadastrar Vaga: ", result.error)
+                    }
+                } catch (error) {
+                    console.log("Erro ao conectar ao Servidor", error);
+                    toast.error("Erro ao conectar ao servidor. Tente novamente mais tarde.");
+                };
             } else {
-                console.log("Erro ao cadastrar Vaga: ", result.error)
+                toast.error("Apenas empresas podem cadastrar vagas");
             }
-        } catch (error) {
-            console.log("Erro ao conectar ao Servidor", error);
-            toast.error("Erro ao conectar ao servidor. Tente novamente mais tarde.");
-        };
-    } else
-    {
-        toast.error("Faça Login para cadastrar uma vaga");
+        } else {
+            toast.error("Faça Login para cadastrar uma vaga");
+        }
     }
-}
-    
+
     return (
         <>
             <ToastContainer
@@ -223,13 +227,6 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
                                         onChange={handleChange}
                                     />
                                 </div>
-
-                                {/* <div className="form-group">
-                                <label htmlFor="pcd">Vaga para PCD?</label>
-                                <input type="radio" name="pcd" id="yesPcd" value="sim" /> <label htmlFor="yesPcd">Sim</label>
-                                <input type="radio" name="pcd" id="noPcd" value="não" checked /> <label
-                                    htmlFor="noPcd">Não</label>
-                            </div> */}
                                 <div className="form-group pcd">
                                     <label htmlFor="pcd">Vaga para PCD?</label>
                                     <div>
@@ -283,10 +280,6 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
 
                                 <div className="form-group">
                                     <label htmlFor="salary">Salário</label>
-                                    {/* <input type="radio" name="salary" id="yesSalary" value="sim" checked /> <label
-                                        htmlFor="yesSalary">Sim</label>
-                                    <input type="radio" name="salary" id="noSalary" value="não" /> <label
-                                        htmlFor="noSalary">Não</label> */}
                                     <input
                                         type="text"
                                         className="form-control"
