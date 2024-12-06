@@ -42,7 +42,7 @@ export default function AllVacany({ typeUser, fezLogin, handleLogout }) {
                 <div className="grid-vagas">
                     {
                         listDataVvacany.map((item, index) => (
-                            <Vacany key={index} listDataVvacany={item} />
+                            <Vacany key={index} listDataVvacany={item} fezLogin={fezLogin} />
                         ))
                     }
                 </div>

@@ -2,6 +2,9 @@ import { useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
+import '../styles/JobForms.css'
 
 export default function InfoJob({ typeUser, fezLogin, handleLogout }) {
     const location = useLocation();
@@ -15,27 +18,38 @@ export default function InfoJob({ typeUser, fezLogin, handleLogout }) {
         <>
             <Header typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />
             <main className="jobforms">
-                <div className="titulo-pagina-vaga infojob">
+                <div className="infojob">
                     <h1>Informações da <span>Vaga</span></h1>
                 </div>
 
                 <div className="display-job-info">
+                    <h3>Informações Principais </h3>
                     <div className="job-info">
-                        <p><strong>Empresa:</strong> {jobData.enterprise}</p>
-                        <p><strong>Título:</strong> {jobData.title}</p>
-                        <p><strong>Habilidades:</strong> {jobData.ability}</p>
-                        <p><strong>Local:</strong> {jobData.local}</p>
-                        <p><strong>Tipo de Contrato:</strong> {jobData.contractType}</p>
-                        <p><strong>Modalidade:</strong> {jobData.modality}</p>
-                        <p><strong>Quantidade de Vagas:</strong> {jobData.amount}</p>
-                        <p><strong>Área de Atuação:</strong> {jobData.areaActivity}</p>
-                        <p><strong>PCD:</strong> {jobData.pcd}</p>
-                        <p><strong>CNH:</strong> {jobData.cnh}</p>
-                        <p><strong>Salário:</strong> {jobData.salary}</p>
-                        <p><strong>Benefícios:</strong> {jobData.benefits}</p>
-                        <p><strong>Descrição:</strong> {jobData.description}</p>
+                        <p><span>Empresa:</span> {jobData.enterprise}</p>
+                        <p><span>Título:</span> {jobData.title}</p>
+                        <p><span>Habilidades:</span> {jobData.ability}</p>
+                        <p><span>Local:</span> {jobData.local}</p>
+                        <p><span>Tipo de Contrato:</span> {jobData.contractType}</p>
+                        <p><span>Modalidade:</span> {jobData.modality}</p>
+                        <p><span>Quantidade de Vagas:</span> {jobData.amount}</p>
+                        <p><span>Área de Atuação:</span> {jobData.areaActivity}</p>
+                        <p><span>PCD:</span> {jobData.pcd}</p>
+                        <p><span>CNH:</span> {jobData.cnh}</p>
+                        <p><span>Salário:</span> {jobData.salary}</p>
                     </div>
                 </div>
+
+                <div className="display-job-info">
+                    <h3>Informações Adicionais </h3>
+                    <div className="job-info-2">
+                        <p><span>Descrição:</span> {jobData.description}</p>
+                        <p><span>Benefícios:</span> {jobData.benefits}</p>
+                    </div>
+                </div>
+
+                <Link to='/applyvacany'>
+                <button className="candidatar">Candidatar</button>
+                </Link>
             </main>
             <Footer />
         </>
