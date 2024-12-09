@@ -14,7 +14,7 @@ function App() {
     // console.log(users);
     const [fezLogin, setFezLogin] = useState(false); //True para logado e falso para deslogado
     const [typeUser, setTypeUser] = useState(1); //0 para empresa, 1 para usuário, 2 para adm
-    // const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
 
     function handleLogout() {
         setFezLogin(false);
@@ -24,13 +24,15 @@ function App() {
         window.location.reload();
     }
 
+    // console.log("O email logado é:", email);
+
     return (
         <>
             <Router>
                 <Routes>
                     <Route path="/" element={<Home fezLogin={fezLogin} typeUser={typeUser} setFezLogin={setFezLogin} setTypeUser={setTypeUser} handleLogout={handleLogout}/>} />
-                    <Route path="/login" element={<Login setFezLogin={setFezLogin} setTypeUser={setTypeUser} />} />
-                    <Route path="/vacany" element={<JobForms typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />} />
+                    <Route path="/login" element={<Login setFezLogin={setFezLogin} setTypeUser={setTypeUser} setEmail={setEmail}/>} />
+                    <Route path="/vacany" element={<JobForms typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} email={email} />} />
                     <Route path="/allvacany" element={<AllVacany typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />
                     <Route path="/applyvacany" element={<JobApplicationForm typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />
                     <Route path="/infojob" element={<InfoJob typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />

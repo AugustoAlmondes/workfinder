@@ -11,7 +11,7 @@ import '../styles/Login.css'
 // import background from "../components/Background";
 
 
-export default function Login({ setFezLogin, setTypeUser }) {
+export default function Login({ setFezLogin, setTypeUser, setEmail }) {
     const navigate = useNavigate();
     const [frameLogin, setFrameLogin] = useState(2) //0 PARA EMPRESA, 1 PARA USUARIO E 2 PARA LOGIN
     const [isEnterprise, setIsEnterprise] = useState(null)
@@ -101,7 +101,7 @@ export default function Login({ setFezLogin, setTypeUser }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (frameLogin === 1) {
+        if (frameLogin === 1) { // CADASTRO USUARIO
 
             if (dataUser.senha !== dataUser.confirmSenha) {
                 toast.error("Confirme a senha corretamente", {
@@ -145,17 +145,21 @@ export default function Login({ setFezLogin, setTypeUser }) {
                 console.log("Erro ao conectar ao servidor", error);
             };
         }
-        else if (frameLogin === 0) {
+
+        else if (frameLogin === 0) { //CADASTRAR EMPRESA
             console.log("Dados a serem enviados:", dataEmpresa);
             try {
-                let aux = dataEmpresa.senha
-                dataEmpresa.senha = await bcrypt.hash(dataEmpresa.senha, 10);
+                const saltRounds = 10; // Define o número de rounds para gerar o salt
+                const hashedSenhaEmpresa = await bcrypt.hash(dataEmpresa.senha, saltRounds);
+
+                const dataEmpresaHashed = { ...dataEmpresa, senha: hashedSenhaEmpresa };
+
                 const response = await fetch("http://localhost:8800/empresa", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(dataEmpresa)
+                    body: JSON.stringify(dataEmpresaHashed)
                 });
                 const result = await response.json();
 
@@ -169,13 +173,13 @@ export default function Login({ setFezLogin, setTypeUser }) {
                 }
                 else {
                     console.log("Erro ao cadastrar empresa " + result.error);
-                    dataEmpresa.senha = aux;
                 }
             } catch (error) {
                 console.log("Erro ao conectar ao servidor: " + error);
 
             }
-        } else {
+
+        } else { // LOGIN
             e.preventDefault();
 
             try {
@@ -193,6 +197,7 @@ export default function Login({ setFezLogin, setTypeUser }) {
 
                 const result = await response.json();
                 if (response.ok) {
+                    setEmail(dataLogin.email);
                     console.log(result.message);
                     toast.success("Login realizado com Sucesso");
 
@@ -575,4 +580,5 @@ export default function Login({ setFezLogin, setTypeUser }) {
 Login.propTypes = {
     setFezLogin: PropTypes.func.isRequired,
     setTypeUser: PropTypes.func.isRequired,
+    setEmail: PropTypes.func.isRequired
 }

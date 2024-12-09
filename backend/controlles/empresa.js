@@ -34,14 +34,14 @@ export const addVacany = (req, res) => {
     //     tipo_contratacao, modalidade_trabalho, quantidade_vagas,
     //     area_atuacao, pcd, tipo_carteira_motorista, salario,
     //     beneficios, descricao } = req.body;
-    const { enterprise, title, ability, local, contractType, modality, amount, areaActivity, pcd, cnh, salary, benefits, description } = req.body;
+    const { enterprise, title, ability, local, contractType, modality, amount, areaActivity, pcd, cnh, salary, benefits, description, email } = req.body;
 
     // const q = "INSERT INTO vaga (empresa, titulo, habilidades_qualificacoes, localizacao, tipo_contratacao, modalidade_trabalho, quantidade_vagas, area_atuacao, pcd, tipo_carteira_motorista, salario, beneficios, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    const q = "INSERT INTO vaga (enterprise, title, ability, local, contractType, modality, amount, areaActivity, pcd, cnh, salary, benefits, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const q = "INSERT INTO vaga (enterprise, title, ability, local, contractType, modality, amount, areaActivity, pcd, cnh, salary, benefits, description, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     // const values = [empresa, titulo, habilidades_qualificacoes, localizacao, tipo_contratacao, modalidade_trabalho, quantidade_vagas, area_atuacao, pcd, tipo_carteira_motorista, salario, beneficios, descricao]
-    const values = [enterprise, title, ability, local, contractType, modality, amount, areaActivity, pcd, cnh, salary, benefits, description];
+    const values = [enterprise, title, ability, local, contractType, modality, amount, areaActivity, pcd, cnh, salary, benefits, description, email];
 
     console.log("Comando SQL:", q);
     console.log("Valores para o SQL:", values);

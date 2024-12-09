@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 
 
-export default function JobForms({ typeUser, fezLogin, handleLogout }) {
+export default function JobForms({ typeUser, fezLogin, handleLogout, email }) {
 
     const [dataVacany, setDataVacany] = useState({
         enterprise: '',
@@ -22,7 +22,8 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
         cnh: '',
         salary: '',
         benefits: '',
-        description: ''
+        description: '',
+        email: email
     })
 
     const clearInput = () => {
@@ -39,7 +40,8 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
             cnh: '',
             salary: '',
             benefits: '',
-            description: ''
+            description: '',
+            email:''
         });
     }
 
@@ -342,5 +344,6 @@ export default function JobForms({ typeUser, fezLogin, handleLogout }) {
 JobForms.prototype = {
     typeUser: PropTypes.string.isRequired,
     fezLogin: PropTypes.bool.isRequired,
-    handleLogout: PropTypes.func.isRequired
+    handleLogout: PropTypes.func.isRequired,
+    email: PropTypes.string.isRequired
 };
