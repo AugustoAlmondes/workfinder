@@ -148,6 +148,8 @@ export default function Login({ setFezLogin, setTypeUser }) {
         else if (frameLogin === 0) {
             console.log("Dados a serem enviados:", dataEmpresa);
             try {
+                let aux = dataEmpresa.senha
+                dataEmpresa.senha = await bcrypt.hash(dataEmpresa.senha, 10);
                 const response = await fetch("http://localhost:8800/empresa", {
                     method: "POST",
                     headers: {
@@ -167,7 +169,7 @@ export default function Login({ setFezLogin, setTypeUser }) {
                 }
                 else {
                     console.log("Erro ao cadastrar empresa " + result.error);
-
+                    dataEmpresa.senha = aux;
                 }
             } catch (error) {
                 console.log("Erro ao conectar ao servidor: " + error);

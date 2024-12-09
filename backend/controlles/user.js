@@ -1,5 +1,5 @@
 import { db } from "../db.js";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 
 
 export const getUsers = (_, res) => {
@@ -45,7 +45,8 @@ export const loginUser = (req, res) => {
         }
 
         const user = data[0];
-        const senhaValida = senha === user.senha;
+        // const senhaValida = senha === user.senha;
+        const senhaValida = bcrypt.compareSync(senha, user.senha);
 
         console.log(senhaValida);
 
