@@ -3,9 +3,17 @@ import { PropTypes } from 'prop-types';
 import '../styles/JobForms.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Link } from 'react-router-dom';
 
-export default function JobApplicationForm({ typeUser, fezLogin, handleLogout }) {
+import { Link, useLocation } from 'react-router-dom';
+
+export default function JobApplicationForm({ typeUser, fezLogin, handleLogout, userEmail }) {
+
+    const location = useLocation();
+    const { emailEnterprise } = location.state || {};
+
+    console.log("Email logado:", userEmail)
+    console.log("O email da empresa: ", emailEnterprise);
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -20,7 +28,7 @@ export default function JobApplicationForm({ typeUser, fezLogin, handleLogout })
         desiredSalary: '',
     });
 
-    const clearInput =() => {
+    const clearInput = () => {
         setFormData({
             name: '',
             email: '',
@@ -41,11 +49,39 @@ export default function JobApplicationForm({ typeUser, fezLogin, handleLogout })
         setFormData({ ...formData, [name]: value });
     };
 
-    const ApplyJob = (e) => {
+    async function sendEmail(e) {
         e.preventDefault();
-        console.log(formData);
         clearInput();
-    };
+        alert("Email enviado com sucesso!");
+
+        const payload = {
+            formData,
+            userEmail: fezLogin ? formData.email : "Usuario nao logado",
+            emailEnterprise
+        }
+
+        try {
+            const response = await fetch('http://localhost:8800/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                alert("Email enviado com sucesso!");
+                clearInput();
+            } else {
+                alert("Erro ao enviar email. Tente novamente.");
+            }
+
+        } catch (error) {
+            console.error('Erro ao enviar o email:', error);
+        }
+
+
+    }
 
     return (
         <>
@@ -56,7 +92,7 @@ export default function JobApplicationForm({ typeUser, fezLogin, handleLogout })
                     <div className="row">
                         <div id="form-box" className="col-md-12">
                             <h2 style={{ marginBottom: '40px' }}>Preencha os dados abaixo para a vaga de emprego</h2>
-                            <form onSubmit={ApplyJob}>
+                            <form onSubmit={sendEmail}>
                                 <div className="form-group">
                                     <label htmlFor="name">Nome Completo:</label>
                                     <input
@@ -195,7 +231,7 @@ export default function JobApplicationForm({ typeUser, fezLogin, handleLogout })
                                     />
                                 </div>
                                 {
-                                    fezLogin? (
+                                    fezLogin ? (
                                         <input
                                             type="submit"
                                             value="Enviar Candidatura"
@@ -228,5 +264,6 @@ JobApplicationForm.propTypes = {
     typeUser: PropTypes.number.isRequired,
     fezLogin: PropTypes.bool.isRequired,
     handleLogout: PropTypes.func.isRequired,
-    emailLogin: PropTypes.string.isRequired
+    emailLogin: PropTypes.string.isRequired,
+    userEmail: PropTypes.string.isRequired
 };

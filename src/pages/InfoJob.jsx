@@ -50,7 +50,11 @@ export default function InfoJob({ typeUser, fezLogin, handleLogout }) {
                 {
                     fezLogin ?
                         (
-                            <Link to='/applyvacany' style={{textDecoration: 'none'}}>
+                            <Link to={{
+                                pathname: '/applyvacany',
+                            }}
+                            state={{emailEnterprise: jobData.email}}
+                            style={{textDecoration: 'none'}}>
                                 <button className="candidatar">Candidatar</button>
                             </Link>
                         ) :

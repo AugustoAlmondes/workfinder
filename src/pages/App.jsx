@@ -24,7 +24,7 @@ function App() {
         window.location.reload();
     }
 
-    // console.log("O email logado é:", email);
+    console.log("O email logado é:", email);
 
     return (
         <>
@@ -34,7 +34,7 @@ function App() {
                     <Route path="/login" element={<Login setFezLogin={setFezLogin} setTypeUser={setTypeUser} setEmail={setEmail}/>} />
                     <Route path="/vacany" element={<JobForms typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} email={email} />} />
                     <Route path="/allvacany" element={<AllVacany typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />
-                    <Route path="/applyvacany" element={<JobApplicationForm typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />
+                    <Route path="/applyvacany" element={<JobApplicationForm typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} userEmail={email}/>} />
                     <Route path="/infojob" element={<InfoJob typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout}/>} />
                 </Routes>
             </Router>

@@ -23,7 +23,7 @@ export default function JobForms({ typeUser, fezLogin, handleLogout, email }) {
         salary: '',
         benefits: '',
         description: '',
-        email: email
+        email: ''
     })
 
     const clearInput = () => {
@@ -58,6 +58,10 @@ export default function JobForms({ typeUser, fezLogin, handleLogout, email }) {
 
                 console.log("Ta logado");
                 console.log("Dados a serem enviados:", dataVacany);
+                dataVacany.email = email;
+
+                console.log("Email salvo: ",dataVacany.email);
+
                 try {
                     const response = await fetch("http://localhost:8800/empresa/vacany", {
                         method: "POST",
