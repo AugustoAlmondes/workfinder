@@ -23,9 +23,9 @@ app.use("/", empresaRoutes);
 app.use("/empresa", empresaRoutes);
 
 const transporter = nodemailer.createTransport({
-    service: "gmail", // ou outro serviço de e-mail
+    service: "gmail",
     auth: {
-        user: emailUser, // variáveis de ambiente para maior segurança
+        user: emailUser,
         pass: emailPass,
     },
 });

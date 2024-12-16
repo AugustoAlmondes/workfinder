@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"; // Importa useNavigate
 import { useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import PropTypes from 'prop-types';
+// import phoneMask from "../hooks/handleInputs";
+import { handleInputs } from "../hooks/handleInputs";
 import 'react-toastify/dist/ReactToastify.css'; // Estilos do Toast
 import bcrypt from 'bcryptjs';
 // import { useEffect } from "react";
@@ -10,6 +12,7 @@ import bcrypt from 'bcryptjs';
 import '../styles/Login.css'
 // import background from "../components/Background";
 
+const mask = new handleInputs();
 
 export default function Login({ setFezLogin, setTypeUser, setEmail }) {
     const navigate = useNavigate();
@@ -117,7 +120,7 @@ export default function Login({ setFezLogin, setTypeUser, setEmail }) {
                 // dataUser.senha
                 const saltRounds = 10; // Define o número de rounds para gerar o salt
                 const hashedSenha = await bcrypt.hash(dataUser.senha, saltRounds);
-        
+
                 // Substitui a senha original pelo hash no objeto dataUser
                 const dataUserHashed = { ...dataUser, senha: hashedSenha };
 
@@ -270,9 +273,11 @@ export default function Login({ setFezLogin, setTypeUser, setEmail }) {
                                                 id="telefone_user"
                                                 name="telefone"
                                                 type="tel"
+                                                maxLength={15}
                                                 required
                                                 value={dataUser.telefone}
                                                 onChange={handleChange}
+                                                onKeyUp={mask.phoneMask}
                                             />
                                             <label htmlFor="telefone">Número de telefone</label>
                                         </div>
@@ -283,8 +288,10 @@ export default function Login({ setFezLogin, setTypeUser, setEmail }) {
                                                 name="cep"
                                                 type="text"
                                                 required
+                                                maxLength={9}
                                                 value={dataUser.cep}
                                                 onChange={handleChange}
+                                                onKeyUp={mask.cepMask}
                                             />
                                             <label htmlFor="cep">CEP</label>
                                         </div>
@@ -453,9 +460,11 @@ export default function Login({ setFezLogin, setTypeUser, setEmail }) {
                                                     id="cnpj"
                                                     name="cnpj"
                                                     type="text"
+                                                    maxLength={18}
                                                     required
                                                     value={dataEmpresa.cnpj}
                                                     onChange={handleChange}
+                                                    onKeyUp={mask.cnpjMask}
                                                 />
                                                 <label htmlFor="">CNPJ</label>
                                             </div>
@@ -466,9 +475,11 @@ export default function Login({ setFezLogin, setTypeUser, setEmail }) {
                                                     id="inscricao_estadual"
                                                     name="inscricao_estadual"
                                                     type="text"
+                                                    maxLength={12}
                                                     required
                                                     value={dataEmpresa.inscricao_estadual}
                                                     onChange={handleChange}
+                                                    onKeyUp={mask.stateRegistrationMask}
                                                 />
                                                 <label htmlFor="">Inscrição Estadual</label>
                                             </div>
@@ -479,17 +490,16 @@ export default function Login({ setFezLogin, setTypeUser, setEmail }) {
                                                     id="inscricao_municipal"
                                                     name="inscricao_municipal"
                                                     type="text"
+                                                    maxLength={7}
                                                     required
                                                     value={dataEmpresa.inscricao_municipal}
+                                                    onKeyUp={mask.municipalRegistrationMask}
                                                     onChange={handleChange}
                                                 />
                                                 <label htmlFor="">Inscrição Municipal</label>
                                             </div>
 
                                             <div className="textbox">
-                                                {/* <input type="tel" id="telefone"
-                                                    //  onkeyup="mascaraFone(event)" 
-                                                    className="input-padrao" required /> */}
                                                 <input
                                                     id="telefone"
                                                     name="telefone"
@@ -497,12 +507,12 @@ export default function Login({ setFezLogin, setTypeUser, setEmail }) {
                                                     required
                                                     value={dataEmpresa.telefone}
                                                     onChange={handleChange}
+                                                    onKeyUp={mask.phoneMask}
                                                 />
                                                 <label htmlFor="">Telefone</label>
                                             </div>
 
                                             <div className="textbox">
-                                                {/* <input type="text" required="required" /> */}
                                                 <input
                                                     id="cep"
                                                     name="cep"
@@ -510,12 +520,12 @@ export default function Login({ setFezLogin, setTypeUser, setEmail }) {
                                                     required
                                                     value={dataEmpresa.cep}
                                                     onChange={handleChange}
+                                                    onKeyUp={mask.cepMask}
                                                 />
                                                 <label htmlFor="">CEP</label>
                                             </div>
 
                                             <div className="textbox">
-                                                {/* <input type="text" required="required" /> */}
                                                 <input
                                                     id="endereco"
                                                     name="endereco"
@@ -528,7 +538,6 @@ export default function Login({ setFezLogin, setTypeUser, setEmail }) {
                                             </div>
 
                                             <div className="textbox">
-                                                {/* <input type="text" required="required" /> */}
                                                 <input
                                                     id="emailEmpresa"
                                                     name="email"

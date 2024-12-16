@@ -5,10 +5,13 @@ import '../styles/Vacany.css'
 
 import { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
+import searchJob from "../hooks/searchJob";
 
 export default function AllVacany({ typeUser, fezLogin, handleLogout }) {
 
     const [listDataVvacany, setListDataVacany] = useState([]);
+    const [searchList, setSearchList] = useState([]);
+    const [searchOn, setSearchOn] = useState(false);
 
 
     useEffect(() => {
@@ -20,6 +23,12 @@ export default function AllVacany({ typeUser, fezLogin, handleLogout }) {
         getAllVacany();
     }, [])
 
+    function handleSearch(e) {
+        e.preventDefault();
+        const lista = searchJob(listDataVvacany, e.target[0].value);
+        setSearchList(lista);
+    }
+
     return (
         <>
         <Header typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />
@@ -30,20 +39,36 @@ export default function AllVacany({ typeUser, fezLogin, handleLogout }) {
                 <div className="pesquisa-vaga">
                     <h2>Pesquise por uma <span>vaga específica</span> <label htmlFor="pesquisa-vaga"><i
                         className="bi bi-search"></i></label></h2>
-                    <div className="container-pesquisa">
-                        <input className="input-vaga" type="text" name="pesquisa-vaga" id="pesquisa-vaga"
-                            placeholder="Procurar Vaga" />
+                    <form className="container-pesquisa" onSubmit={handleSearch}>
+                        <input
+                        className="input-vaga" 
+                        type="text" 
+                        name="pesquisa-vaga" 
+                        id="pesquisa-vaga"
+                        placeholder="Digite a característica"
+                        onChange={(e)=> {
+                            if( e.target.value == '')
+                            {
+                                setSearchOn(false);
+                            }
+                        }}
+                        />
 
-                        <button className="botao-pesquisa-vaga">Pesquisar</button>
-                    </div>
+                        <button type="submit" className="botao-pesquisa-vaga" onClick={() => setSearchOn(true)}>Pesquisar</button>
+                    </form>
                 </div>
 
                 <h4 className="subtitulo-vaga">Todas as Vagas</h4>
                 <div className="grid-vagas">
-                    {
+                    { !searchOn ? (
                         listDataVvacany.map((item, index) => (
                             <Vacany key={index} listDataVvacany={item} fezLogin={fezLogin} />
                         ))
+                    ): (
+                        searchList.map((item, index) => (
+                            <Vacany key={index} listDataVvacany={item} fezLogin={fezLogin} />
+                        ))
+                    )
                     }
                 </div>
             </main>

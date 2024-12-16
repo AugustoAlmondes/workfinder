@@ -3,9 +3,11 @@ import Header from '../components/Header';
 import { toast, ToastContainer } from 'react-toastify';
 import PropTypes from 'prop-types'
 import '../styles/JobForms.css'
+
 import { useState } from 'react';
+import {handleInputs} from '../hooks/handleInputs'
 
-
+let mask = new handleInputs();
 
 export default function JobForms({ typeUser, fezLogin, handleLogout, email }) {
 
@@ -295,6 +297,7 @@ export default function JobForms({ typeUser, fezLogin, handleLogout, email }) {
                                         required
                                         value={dataVacany.salary}
                                         onChange={handleChange}
+                                        onKeyUp={mask.salaryMask}
                                     />
                                 </div>
                                 <div className="form-group">

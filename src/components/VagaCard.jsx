@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export default function VagaCard({ listDataVvacany, nomeEmpresaVaga, cargoVaga }) {
     return (
         <>
-            <div className="card">
+            <div className="card-home card">
                 <div className="foto-card">
                     {/* <img src="../imagens/assai.png" alt="logo_empresa" /> */}
 

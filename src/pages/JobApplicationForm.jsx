@@ -4,8 +4,12 @@ import '../styles/JobForms.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+import { toast, ToastContainer } from 'react-toastify';
 import { Link, useLocation } from 'react-router-dom';
+import { handleInputs } from '../hooks/handleInputs';
 
+
+let mask = new handleInputs();
 export default function JobApplicationForm({ typeUser, fezLogin, handleLogout, userEmail }) {
 
     const location = useLocation();
@@ -52,7 +56,8 @@ export default function JobApplicationForm({ typeUser, fezLogin, handleLogout, u
     async function sendEmail(e) {
         e.preventDefault();
         clearInput();
-        alert("Email enviado com sucesso!");
+
+        // alert("Email enviado com sucesso!");
 
         const payload = {
             formData,
@@ -70,10 +75,16 @@ export default function JobApplicationForm({ typeUser, fezLogin, handleLogout, u
             });
 
             if (response.ok) {
-                alert("Email enviado com sucesso!");
+                // alert("Email enviado com sucesso!");
+                toast.success("Submissão realizado", {
+                    className: 'toast-sucees',
+                });
                 clearInput();
             } else {
-                alert("Erro ao enviar email. Tente novamente.");
+                toast.error("Erro ao enviar email. Tente novamente.", {
+                    className: 'toast-error',
+                })
+                // alert("Erro ao enviar email. Tente novamente.");
             }
 
         } catch (error) {
@@ -85,6 +96,17 @@ export default function JobApplicationForm({ typeUser, fezLogin, handleLogout, u
 
     return (
         <>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <Header typeUser={typeUser} fezLogin={fezLogin} handleLogout={handleLogout} />
 
             <main className='jobforms'>
@@ -228,6 +250,7 @@ export default function JobApplicationForm({ typeUser, fezLogin, handleLogout, u
                                         placeholder="Digite o salário pretendido"
                                         value={formData.desiredSalary}
                                         onChange={handleChange}
+                                        onKeyUp={mask.salaryMask}
                                     />
                                 </div>
                                 {
