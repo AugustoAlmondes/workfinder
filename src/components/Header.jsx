@@ -1,7 +1,7 @@
 import '../styles/header.css'
 import Logo from '../assets/Logomarca.png'
 import PropTypes from 'prop-types'
-import { Link, ScrollRestoration } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import handleLogout from '../pages/Home'
 
 function Header({ typeUser, fezLogin, handleLogout }) {

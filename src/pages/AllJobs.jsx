@@ -9,7 +9,88 @@ import searchJob from "../hooks/searchJob";
 
 export default function AllVacany({ typeUser, fezLogin, handleLogout }) {
 
-    const [listDataVvacany, setListDataVacany] = useState([]);
+    const [listDataVvacany, setListDataVacany] = useState([
+        {
+            id: 1,
+            enterprise: "Assai Atacadista",
+            title: "Analista de Rede",
+            contractType: "Presencial",
+            modality: "Presencial",
+            areaActivity: "Vendas",
+            local: "Rio de Janeiro",
+            pcd: "não",
+            cnh: "não",
+            amount: 1,
+            salary: "R$ 3.000,00",
+            benefits: "R$ 1.000,00",
+            description: "Vaga para analista de rede. Clique aqui para saber mais.",
+            email: "6Gd0y@example.com"
+        },
+        {
+            id: 2,
+            enterprise: "Engipec",
+            title: "Vendedor",
+            contractType: "Presencial",
+            modality: "Presencial",
+            areaActivity: "Vendas",
+            local: "Rio de Janeiro",
+            pcd: "não",
+            cnh: "não",
+            amount: 1,
+            salary: "R$ 3.000,00",
+            benefits: "R$ 1.000,00",
+            description: "Vaga para vendedor. Clique aqui para saber mais.",
+            email: "6Gd0y@example.com"
+        },
+        {
+            id: 3,
+            enterprise: "Atacadão",
+            title: "Faxineiro",
+            contractType: "Presencial",
+            modality: "Presencial",
+            areaActivity: "Vendas",
+            local: "Rio de Janeiro",
+            pcd: "não",
+            cnh: "não",
+            amount: 1,
+            salary: "R$ 3.000,00",
+            benefits: "R$ 1.000,00",
+            description: "Vaga para faxineiro. Clique aqui para saber mais.",
+            email: "6Gd0y@example.com"
+        },
+        {
+            id: 4,
+            enterprise: "Atacadão",
+            title: "Faxineiro",
+            contractType: "Presencial",
+            modality: "Presencial",
+            areaActivity: "Vendas",
+            local: "Rio de Janeiro",
+            pcd: "não",
+            cnh: "não",
+            amount: 1,
+            salary: "R$ 3.000,00",
+            benefits: "R$ 1.000,00",
+            description: "Vaga para faxineiro. Clique aqui para saber mais.",
+            email: "6Gd0y@example.com"
+        },
+        {
+            id: 5,
+            enterprise: "Atacadão",
+            title: "Faxineiro",
+            contractType: "Presencial",
+            modality: "Presencial",
+            areaActivity: "Vendas",
+            local: "Rio de Janeiro",
+            pcd: "não",
+            cnh: "não",
+            amount: 1,
+            salary: "R$ 3.000,00",
+            benefits: "R$ 1.000,00",
+            description: "Vaga para faxineiro. Clique aqui para saber mais.",
+            email: "6Gd0y@example.com"
+        }
+    ]);
     const [searchList, setSearchList] = useState([]);
     const [searchOn, setSearchOn] = useState(false);
 
@@ -77,7 +158,6 @@ export default function AllVacany({ typeUser, fezLogin, handleLogout }) {
         </>
     );
 }
-
 AllVacany.prototype = {
     typeUser: PropTypes.string.isRequired,
     fezLogin: PropTypes.bool.isRequired,
